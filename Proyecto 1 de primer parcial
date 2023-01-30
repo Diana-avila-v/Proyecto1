@@ -51,7 +51,7 @@ Funcion operacion()
 	FinSegun
 FinFuncion
 ///  2 )Dividir dos numeros por restas
-funcion dividiednoNumeros()
+funcion dividiendoNumeros()
 	definir num1, num2 , resultado Como Entero
 	escribir "Escriba un numero, por favor"
 	leer num1
@@ -331,19 +331,19 @@ FinFuncion
 ///  7) Indicar cuantas palabras hay en una frase asumiendo 1 o varios espacios entre palabras
 Funcion contarPalabras()
 	Definir cad Como Caracter;
-	Definir posicion,cont Como Entero;
+	Definir pos,cont Como Entero;
 	cont<-0;
-	posicion<-0;
+	pos<-0;
 	Escribir "Introduce una cadena:";
 	Leer cad
-	Mientras Subcadena(cad,posicion,posicion)=" " Hacer
-		posicion<-posicion+1;
+	Mientras Subcadena(cad,pos,pos)=" " Hacer
+		pos<-pos+1;
 	FinMientras
-	Para posicion<-posicion hasta Longitud(cad)-1 Hacer
-		Si Subcadena(cad,posicion,posicion)=" " Entonces // recorre cada posicion y verifica si hay un espacio lo cuenta, si no hay sale del bucle y vuelve a preguntar
+	Para pos=pos hasta Longitud(cad)-1 Hacer
+		Si Subcadena(cad,pos,pos)=" " Entonces // recorre cada posicion y verifica si hay un espacio lo cuenta, si no hay sale del bucle y vuelve a preguntar
 			cont<-cont+1;
-			Mientras Subcadena(cad,posicion,posicion)=" " Y posicion<=Longitud(cad) Hacer
-				posicion<-posicion+1;
+			Mientras Subcadena(cad,pos,pos)=" " Y pos<=Longitud(cad) Hacer
+				pos=pos+1;
 			FinMientras
 		FinSi
 	FinPara
@@ -385,6 +385,30 @@ Funcion palindroma()
 		escribir " la palabra" " ", palabra," " "no es palindromo"
 	FinSi
 FinFuncion
+/// 10) Presentar la posicion de un caracter o subcadena cualquiera dentro de una cadena
+funcion encontrar()
+	Definir vCadena,vLetra Como Caracter
+	Definir i,vIndice Como Entero
+	Definir Encontrado Como Logico
+	Escribir "Ingresa la cadena"
+	Leer vCadena
+	Escribir "Ingresa la letra" 
+	leer vLetra
+	i = 0
+	Encontrado = Falso
+	Mientras (i <= Longitud(vCadena)) y no Encontrado Hacer
+		si (Subcadena(vCadena,i,i) = vLetra) Entonces //recorre la cadena, buscando el caracter.
+			Encontrado = Verdadero
+			vIndice = i // guarda el caracter encontrado.
+		FinSi
+		i = i + 1
+	Fin Mientras
+	si no Encontrado Entonces
+		Escribir "Letra no encontrada"
+	SiNo
+		Escribir "Letra encontrada en la posicion ",vIndice
+	FinSi
+FinFuncion
 ///----------------------------------------------------------------- * ARREGLOS * ------------------------------------------------------------------------
 ///  1) Ingresar 10 numueros y presentar cada uno
 Funcion Presentarnumeros()
@@ -394,9 +418,9 @@ Funcion Presentarnumeros()
 	Escribir "Ingrese cantidad de elementos"
 	leer lon
 	Para pos=0 Hasta lon-1 Con Paso 1 Hacer
-		Escribir "numero#",pos+1
+		Escribir "numero #",pos+1
 		leer num
-		numeros[pos]= num
+		numeros[pos]= num //guarda los numeros en el arreglo
 	Fin Para
 	Escribir "Numeros del arreglo"
 	Para pos=0 Hasta lon-1 Con Paso 1 Hacer
@@ -410,7 +434,7 @@ Funcion ArregloMultiplos3()
 	Dimension arreglo[n]
 	c=0; pos=0
 	mientras c < n Hacer
-		Escribir "Ingrses un numero"; leer num
+		Escribir "Ingrese numero #",pos+1; leer num
 		si num mod 3 = 0 Entonces
 			arreglo[pos]=num
 			pos= pos + 1
@@ -427,20 +451,19 @@ Funcion Paress()
 	pares=0
 	impares=0
 	Dimension arreglo[5]
-	Para x = 1 Hasta 4  Con Paso 1 Hacer
-		Escribir "ingresar numero"
+	Para x = 0 Hasta 4  Con Paso 1 Hacer
+		Escribir "ingresar numero # ",x+1
 		Leer arreglo(x)
 	Fin Para
 	pares = 0
-	Para x = 1 Hasta 4 Con Paso 1 Hacer
+	Para x = 0 Hasta 4 Con Paso 1 Hacer
 		Si arreglo(x) mod 2 == 0 Entonces
 			pares = pares +1
 		SiNo
 			impares=impares+1
 		FinSi
 	Fin Para
-	Escribir "los numeros pares del arreglo son: " pares
-	Escribir "[",x,"]=" , pares
+	Escribir "los numeros pares del arreglo son: ",pares
 FinFuncion
 ///  3) Dado una serie de numeros guardar en un arreglo solo los numeros negativos"
 Funcion arregloNegativos()
@@ -697,6 +720,7 @@ Algoritmo Proyecto
 							Esperar 3 Segundos
 						"2":
 							Escribir "Ejercicio 2"
+							dividiendoNumeros()
 							Esperar 3 Segundos
 						"3":
 							Escribir "Ejercicio 3"
@@ -782,6 +806,7 @@ Algoritmo Proyecto
 							Esperar 8 Segundos
 						"10":
 							Escribir "Ejercicio 10"
+							encontrar()
 							Esperar 8 Segundos
 						"11":
 							Escribir "Regresando al Menu Principal"
